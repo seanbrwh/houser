@@ -2,18 +2,13 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {update_money} from '../../ducks/reducer'
+import {update_rent,update_mortgage} from '../../ducks/reducer'
 
 
 class StepThree extends Component{
-    handleChange(input,val){
-        if(input === 'mortgage'){this.setState({mortgage:val})}
-        if(input === 'rent'){this.setState({rent:val})}
-        
-    }
     addHome(){
-        const {name,address,city,state,zipcode} = this.state
-        axios.post('/api/houses',{name,address,city,state,zipcode}).then(result =>{
+        let {name,address,city,curState,zipcode} = this.props
+        axios.post('/api/houses',{name,address,city,curState,zipcode}).then(result =>{
             
         })
     }
@@ -23,19 +18,19 @@ class StepThree extends Component{
             <input 
                 placeholder='Mortgage' 
                 type="text"
-                onChange={(e)=>{ this.handleChange('mortgage',e.target.value)}}
+                onChange={(e)=> this.props.update_mortgage(e.target.value)}
             />
             <input 
                 placeholder='Rent' 
                 type="text" 
-                onChange={(e)=>{ this.handleChange('rent',e.target.value)}}
+                onChange={(e)=> this.props.update_rent(e.target.value)}
             />
             <Link to='/'> 
-                <button onClick={()=> this.update_money()}>
+                <button>
                     Complete
                 </button> 
             </Link>
-            {JSON.stringify(this.state)}
+            {JSON.stringify(this.props)}
             </div>
         )
     }
@@ -53,4 +48,4 @@ function mapState(state){
     }
 }
 
-export default connect(mapState,{update_money})(StepThree)
+export default connect(mapState,{update_mortgage,update_rent})(StepThree)

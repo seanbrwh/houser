@@ -1,51 +1,66 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux'
-import {update_all} from '../../ducks/reducer';
+import {update_name,update_address,update_city,update_state,update_zipcode} from '../../ducks/reducer'
+
 
 class StepOne extends Component{
-    handleChange(input,val){
-        if(input === 'name'){this.setState({name:val})}
-        if(input === 'address'){this.setState({address:val})}
-        if(input === 'city'){this.setState({city:val})}
-        if(input === 'state'){this.setState({curState:val})}
-        if(input === 'zip'){this.setState({zipcode:val})}
+    constructor(){
+        super()
+        this.state={
+            name:'',
+            address:'',
+            city:'',
+            state:'',
+            zipcode:0
+        }
     }
+    componentDidUpdate(props,state){
+        if(props !== state){
+            this.setState({
+                name: this.props.name,
+                address:this.props.city,
+                city: this.props.city,
+                state: this.props.curState,
+                zipcode:this.state.zipcode
+            })
+        }
+    }   
     render(){
-        
-        let {name,address,city,curState,zipcode} = this.props
+        let {update_name,update_address,update_city,update_state,update_zipcode} = this.props
         return(
             <div>
             <input 
                 placeholder='Property Name' 
                 type="text" 
-                onChange={(e)=>{ this.handleChange('name',e.target.value)}}
+                onChange={(e)=> update_name(e.target.value)}
             />
             <input 
                 placeholder='Address' 
                 type="text" 
-                onChange={(e)=>{ this.handleChange('address',e.target.value)}}
+                onChange={(e)=> update_address(e.target.value)}
             />
             <input 
                 placeholder='City' 
-                type="text" 
-                onChange={(e)=>{ this.handleChange('city',e.target.value)}}
+                type="text"    
+                onChange={(e)=> update_city(e.target.value)}
             />
             <input 
                 placeholder='State' 
                 type="text" 
-                onChange={(e)=>{ this.handleChange('state',e.target.value)}}
+                onChange={(e)=> update_state(e.target.value)}
             />
             <input 
                 placeholder='Zipcode' 
                 type="text" 
-                onChange={(e)=>{ this.handleChange('zip',e.target.value)}}
+                onChange={(e)=> update_zipcode(e.target.value)}
             />
             <Link to='/wizard/step2'> 
-                <button onClick={()=> this.props.update_all(name,address,city,curState,zipcode)}>
+                <button>
                     Next Step
                 </button> 
             </Link>
+            {JSON.stringify(this.props)}
             {JSON.stringify(this.state)}
             </div>
         )
@@ -62,4 +77,7 @@ function mapStateToProps(state){
         zipcode
     }
 }
-export default connect(mapStateToProps,{update_all})(StepOne)
+export default connect(
+    mapStateToProps,
+    {update_name,update_address,update_city,update_state,update_zipcode}
+)(StepOne)

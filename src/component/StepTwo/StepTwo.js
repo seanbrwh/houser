@@ -1,27 +1,25 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {update_img} from '../../ducks/reducer'
+import {update_img} from '../../ducks/reducer';
+
 
 class StepTwo extends Component{
-    handleChange(val){
-        this.setState({img:val})
-    }
     render(){
-        let {img} = this.props
+        let {update_img} = this.props
         return(
             <div>
             <input 
                 placeholder='Image Url' 
                 type="text" 
-                onChange={(e)=>{ this.handleChange(e.target.value)}}
+                onChange={(e)=> update_img(e.target.value)}
             />
             <Link to='/wizard/step3'> 
-                <button onClick={()=> this.props.update_img(img)}>
+                <button>
                     Next Step
                 </button> 
             </Link>
-            {JSON.stringify(this.state)}
+            {JSON.stringify(this.props)}
             </div>
         )
     }

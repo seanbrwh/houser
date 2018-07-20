@@ -2,14 +2,15 @@ import React,{Component} from 'react';
 import StepOne from '../StepOne/StepOne'
 import StepTwo from '../StepTwo/StepTwo'
 import StepThree from '../StepThree/StepThree'
-import {Switch,Route} from 'react-router-dom'
+import {Switch,Route,Link} from 'react-router-dom'
+
 
 
 export default class Wizard extends Component{
     render(){
         return(
             <div>
-                <h1>Add New Listing</h1>
+                <Link style={{textDecoration:'none'}} to='/'> <h1>Add New Listing</h1> </Link> 
                 <Switch>
                     <Route exact path='/wizard/step1' component={StepOne}/>
                     <Route exact path='/wizard/step2' component={StepTwo}/>
