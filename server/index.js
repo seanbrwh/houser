@@ -26,11 +26,11 @@ app.post('/api/houses',(req,res,next)=>{
     })
 })
 app.delete('/api/houses/:id',(req,res,next)=>{
-    const {id} = req.query;
+    const {id} = req.params;
     const db = req.app.set('db');
     db.del_house(id).then(results=>{
         res.sendStatus(200);
-    })
+    }).catch(err=> console.log(err))
 })
 
 // app.post('/api/houses/:id',(req,res,next)=>{

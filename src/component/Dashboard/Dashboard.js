@@ -25,15 +25,15 @@ export default class Dashboard extends Component{
     render(){
         
         return(
-            <div>
+            <div style={{marginBottom:'100px'}}>
             <h3>Dashboard</h3>
                 
                 {
                     this.state.listOfHomes.map(e=> {
-                        return <House key={e.id} id={e.id} name={e.name} address={e.address} city={e.city} state={e.state} zip={e.zip} deleteHouse={e.deleteHouse}/>
+                        return <House key={e.id} id={e.id} name={e.name} address={e.address} city={e.city} state={e.state} zip={e.zip} deleteHouse={this.deleteHouse}/>
                     })
                 }
-                <Link to='/wizard'> <button>Add New Property</button> </Link>
+                <Link to='/wizard/step1'> <button >Add New Property</button> </Link>
             </div>
         )
     }

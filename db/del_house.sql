@@ -1,2 +1,2 @@
 delete from houses
-where id=$
+where id=$1

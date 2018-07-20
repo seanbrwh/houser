@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function House(props){
+    const {id}=props
     return(
         <div>
         <h3>House</h3>
@@ -10,7 +11,7 @@ export default function House(props){
                 <h4>{props.city}</h4>
                 <h4>{props.state}</h4>
                 <h4>{props.zip}</h4>
-                <button style={{float:'right'}} onClick={()=> props.deleteHouse(props.id)}>Delete</button>
+                <button style={{float:'right'}} onClick={()=> props.deleteHouse(id)}>Delete</button>
             </div>
         </div>
     )
